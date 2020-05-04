@@ -36,6 +36,7 @@ docker-compose up -d --build - что бы запустить в режиме д
 ```shell script
 docker-compose exec flask python runner.py db upgrade
 ```
+После чего сайт будет досиупен по адресу: http://127.0.0.1:5000/ 
 
 5. На работу я заложил 4 дня, с 30.04.2020 по 04.05.2020
 6. Реально потратил дня 3 с небольшим.
