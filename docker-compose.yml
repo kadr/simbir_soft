@@ -1,0 +1,43 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: simbirsk_soft
+      POSTGRES_PASSWORD: 156489
+      POSTGRES_DB: simbirsk_soft
+
+  redis:
+    image: redis:alpine
+    command: redis-server --requirepass 156489
+    ports:
+     - 6379:6379
+    volumes:
+     - ./redis-data:/var/lib/redis
+     - ./redis-data/redis.conf:/usr/local/etc/redis/redis.conf
+    environment:
+     - REDIS_REPLICATION_MODE=master
+
+  flask:
+    build: .
+    command: python runner.py runserver -h 0.0.0.0
+    volumes:
+      - ./app:/app
+    expose:
+      - 5000
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+      - redis
+#  web:
+#    image: nginx:1.13
+#    expose:
+#      - 8000
+#    ports:
+#      - 80:8000
+#    volumes:
+#      - ./nginx:/etc/nginx/conf.d
+#    depends_on:
+#      - flask

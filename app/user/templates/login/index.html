@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Войти
+{% endblock %}
+{% block content_title %}
+    Войти
+{% endblock %}
+{% block content %}
+    {% if error %}
+        <p style="color: tomato">{{ message }}</p>
+    {% endif %}
+    <form class="ui form" action="{{ url_for('user.login') }}" method="post">
+      <div class="field {{ 'error' if error }}">
+        <label>Email</label>
+        <input type="text" name="email" placeholder="Email" value="{{ request.form.get('email') if request.form.get('email') }}">
+      </div>
+      <div class="field {{ 'error' if error }}">
+        <label>Пароль</label>
+        <input type="password" name="password" placeholder="Пароль">
+      </div>
+      <button class="ui button" type="submit">Войти</button>
+    </form>
+{% endblock %}

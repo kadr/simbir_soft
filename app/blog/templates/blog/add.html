@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Добавить пост
+{% endblock %}
+{% block content_title %}
+    Добавить пост
+{% endblock %}
+{% block content %}
+    {% if error %}
+        <p style="color: tomato">{{ message }}</p>
+    {% endif %}
+    <form class="ui form" action="{{ url_for('blog.create') }}" method="post">
+      <div class="field {{ 'error' if error }}">
+        <label>Имя</label>
+        <input type="text" name="name" placeholder="Имя" value="{{ request.form.get('name') if request.form.get('name') }}" required>
+      </div>
+      <div class="field">
+        <label>Сообщение</label>
+        <textarea name="text" id="" cols="30" rows="10"></textarea>
+      </div>
+      <button class="ui button" type="submit">Добавить</button>
+    </form>
+{% endblock %}

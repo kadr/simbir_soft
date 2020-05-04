@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Посты
+{% endblock %}
+{% block content_title %}
+    Посты
+{% endblock %}
+{% block content %}
+    <div class="ui comments">
+      <h3 class="ui dividing header">{{ current_user.name }}</h3>
+        {% for item in data %}
+            <div class="ui middle aligned divided list">
+              <div class="item">
+                <div class="right floated content">
+                  <div class="ui button">
+                      <a href="{{ url_for('blog.delete', key=item.get('key')) }}"><i class="trash icon"></i></a>
+                  </div>
+                </div>
+                <div class="content">{{ item.get('text') if item.get('text') }}</div>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
